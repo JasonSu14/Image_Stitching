@@ -1,0 +1,1 @@
+# This is the main file that calls the functions to perform image stitching
