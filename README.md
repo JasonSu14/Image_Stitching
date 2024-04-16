@@ -18,8 +18,8 @@ This image stitching application is designed to combine multiple photographic wi
 
 ## Contributors
 
-Jason Su [su.925@osu.edu]
-Joe Quinn [quinn.450@osu.edu]
+- Jason Su [su.925@osu.edu]
+- Joe Quinn [quinn.450@osu.edu]
 
 ## Work Breakdown
 
