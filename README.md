@@ -1,10 +1,10 @@
 # Image Stitching Project
 
-This project is part of the CSE5524 course at The Ohio State University.
+This is the final project for CSE 5524: Computer Vision for Human-Computer Interaction at The Ohio State University.
 
 ## Description
 
-This project aims to implement image stitching, a process involving the combination of multiple photographic images with overlapping fields of view to produce a segmented panorama or high-resolution image.
+This image stitching application is designed to combine multiple photographic with overlapping fields of view to produce a single larger image, also widely known as a panorama. We will be using SIFT (Scale-Invariant Feature Transform) to detect and match features between images, RANSAC (Random Sample Consensus) to estimate the homography between images, and image warping and blending to combine the images.
 
 ## Installation
 
@@ -14,13 +14,18 @@ This project aims to implement image stitching, a process involving the combinat
 
 ## Usage
 
-Provide instructions on how to use your project.
+[Provide instructions on how to use your project.]
 
 ## Contributors
 
-- Jason Su [su.925@osu.edu]
-- Joe Quinn [quinn.450@osu.edu]
+Jason Su [su.925@osu.edu]
+Joe Quinn [quinn.450@osu.edu]
+
+## Work Breakdown
+
+1. Feature Detection and Matching (using SIFT) -- (OpenCV)
+2. Homography Estimation (using RANSAC) -- Jason: get H, Joe: do RANSAC
+3. Image Warping -- Joe
+4. Image Blending -- Jason
 
 ## License
-
-[MIT](https://choosealicense.com/licenses/mit/)

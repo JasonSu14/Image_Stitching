@@ -1,3 +1,42 @@
+# This is the main file that calls the functions to perform image stitching
+
+import numpy as np
+import cv2
+
+from compute_homography import compute_homography
+
+# load the images you want to stitch together
+image1 = cv2.imread('room_center.png')
+image2 = cv2.imread('room_left.png')
+
+# convert the images to grayscale
+gray_image1 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)
+gray_image2 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
+
+# initialize the SIFT detector
+sift = cv2.SIFT_create()
+
+# find the keypoints and descriptors with SIFT
+keypoints1, descriptors1 = sift.detectAndCompute(gray_image1, None)
+keypoints2, descriptors2 = sift.detectAndCompute(gray_image2, None)
+
+# initialize the Brute Force matcher (BFMatcher)
+bf = cv2.BFMatcher(cv2.NORM_L2, crossCheck=True)
+
+# match the descriptors
+matches = bf.match(descriptors1, descriptors2)
+
+# sort the matches based on distance
+matches = sorted(matches, key = lambda x:x.distance)
+
+# compute the homography
+keypoint1 = np.array([keypoints1[match.queryIdx].pt for match in matches[:15]])
+keypoint2 = np.array([keypoints2[match.trainIdx].pt for match in matches[:15]])
+H = compute_homography(keypoint1, keypoint2)
+
+
+############################################################################################################
+# the following is Joe's code
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
