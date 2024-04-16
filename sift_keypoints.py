@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 def get_sift_points(query_img, train_img):
     img1 = cv2.imread(query_img, cv2.IMREAD_GRAYSCALE)  # queryImage
     img2 = cv2.imread(train_img, cv2.IMREAD_GRAYSCALE)  # trainImage
+    img_color1 = cv2.imread(query_img, cv2.IMREAD_COLOR)  # queryImage
+    img_color2 = cv2.imread(train_img, cv2.IMREAD_COLOR)  # trainImage
     # Initiate SIFT detector
     sift = cv2.SIFT_create()
     # find the keypoints and descriptors with SIFT
@@ -27,4 +29,11 @@ def get_sift_points(query_img, train_img):
                               flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
     plt.imshow(img3), plt.show()
     cv2.imwrite("matches.jpg", img3)
-    return kp_stitch, kp_img
+
+    kp_img_list = [kp.pt for kp in kp_img]
+    kp_stitch_list = [kp.pt for kp in kp_stitch]
+
+    kp_img_np = np.array(kp_img_list)
+    kp_stitch_np = np.array(kp_stitch_list)
+
+    return kp_img_np, kp_stitch_np
