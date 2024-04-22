@@ -6,7 +6,7 @@ from sift_keypoints import get_sift_points
 from run_ransac import run_ransac
 from warping import backward_warping
 from blending import blend_img
-from cropping import crop_image
+from cropping import crop_image, remove_black_edges
 
 def image_stitcher(*image_paths):
     # ensure the input images are either all color or all grayscale (stitching color and grayscale images makes no sense)
@@ -75,11 +75,11 @@ def image_stitcher(*image_paths):
         stitch_mask = np.logical_or(stitch_mask, mask)
 
     # Crop the stitched image
-    stitched_img = crop_image(stitched_img)
+    stitched_img = crop_image(stitched_img, ref_start_y, ref_img_height)
+    stitched_img = remove_black_edges(stitched_img)
 
     # Return the stitched image
     return stitched_img
-
 
 ##################################################
 # # Implementation from Joe
