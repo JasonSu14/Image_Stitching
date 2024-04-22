@@ -1,5 +1,7 @@
+# This file blends two images together using the specified blending mode
+
 import numpy as np
-import cv2
+from scipy.ndimage import distance_transform_edt
 
 def blend_img(dest_img, mask, stitched_img, stitch_mask, blend_mode):
     assert dest_img.dtype == stitched_img.dtype, "Images types do not match"
