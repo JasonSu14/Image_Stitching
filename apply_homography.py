@@ -1,3 +1,5 @@
+# This file applies a homography to a set of points; used in backward warping
+
 import numpy as np
 
 def apply_homography(H_3x3, src_pts_nx2):
