@@ -14,18 +14,10 @@ This image stitching application is designed to combine multiple photographic wi
 
 ## Usage
 
-[Provide instructions on how to use your project.]
+1. Add images you wish to stitch to your current directory.
+2. Go to `run_app.py` file to load your images and run the file.
 
 ## Contributors
 
 - Jason Su [su.925@osu.edu]
 - Joe Quinn [quinn.450@osu.edu]
-
-## Work Breakdown
-
-1. Feature Detection and Matching (using SIFT) -- (OpenCV)
-2. Homography Estimation (using RANSAC) -- Jason: get H, Joe: do RANSAC
-3. Image Warping -- Joe
-4. Image Blending -- Jason
-
-## License

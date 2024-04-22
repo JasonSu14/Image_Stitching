@@ -13,18 +13,21 @@ def transform(img):
     T[1,2] = -s * np.mean(y)
     return T
 
-def compute_homography(keypoint1, keypoint2):
+def compute_homography(keypoints1, keypoints2):
+    # get the number of keypoints
+    num_of_kps = len(keypoints1)
+
     # perform Normalized Direct Linear Transformation on the keypoints
-    Ta = transform(keypoint1)
-    Tb = transform(keypoint2)
-    keypoint1_normalized = np.transpose(np.dot(Ta, np.transpose(np.column_stack((keypoint1, np.ones(15))))))
-    keypoint2_normalized = np.transpose(np.dot(Tb, np.transpose(np.column_stack((keypoint2, np.ones(15))))))
+    Ta = transform(keypoints1)
+    Tb = transform(keypoints2)
+    keypoints1_normalized = np.transpose(np.dot(Ta, np.transpose(np.column_stack((keypoints1, np.ones(num_of_kps))))))
+    keypoints2_normalized = np.transpose(np.dot(Tb, np.transpose(np.column_stack((keypoints2, np.ones(num_of_kps))))))
 
     # create the A matrix for Ah = 0
     A = []
-    for i in range(15):
-        x1, y1, _ = keypoint1_normalized[i]
-        x2, y2, _ = keypoint2_normalized[i]
+    for i in range(num_of_kps):
+        x1, y1, _ = keypoints1_normalized[i]
+        x2, y2, _ = keypoints2_normalized[i]
         A.append([x1, y1, 1, 0, 0, 0, -x2*x1, -x2*y1, -x2])
         A.append([0, 0, 0, x1, y1, 1, -y2*x1, -y2*y1, -y2])
 
@@ -42,15 +45,42 @@ def compute_homography(keypoint1, keypoint2):
     # Remove normalization on H_tilde to get the final homography matrix H
     H = np.dot(np.dot(np.linalg.inv(Tb), H_tilde), Ta)
 
-    print('Final homography H:')
-    print(H)
+    # print('Final homography H:')
+    # print(H)
 
     return H
-    
-    # # compute the singular value decomposition of A
-    # U, S, Vt = np.linalg.svd(A)
-    
-    # # the homography is the last row of V
-    # H = Vt[-1].reshape(3, 3)
-    
-    # return H
+
+########################################
+# second implementation
+# This file contains the function that computes the homography between two images
+# def compute_homography(keypoint1, keypoint2):
+#     # perform Normalized Direct Linear Transformation on the keypoints
+
+#     print("Shape of keypoints 1: ", keypoint1.shape)
+#     print("Shape of keypoints 2: ", keypoint2.shape)
+#     num_of_kps = keypoint1.shape[0]
+
+#     print("Shape of op:", np.transpose(np.column_stack((keypoint1, np.ones(num_of_kps)))).shape)
+#     keypoint1_homogeneous = np.column_stack((keypoint1, np.ones(num_of_kps)))
+#     keypoint2_homogeneous = np.column_stack((keypoint2, np.ones(num_of_kps)))
+
+#     # create the A matrix for Ah = 0
+#     A = []
+#     for i in range(num_of_kps):
+#         x1, y1, _ = keypoint1_homogeneous[i]
+#         x2, y2, _ = keypoint2_homogeneous[i]
+#         A.append([x1, y1, 1, 0, 0, 0, -x2 * x1, -x2 * y1, -x2])
+#         A.append([0, 0, 0, x1, y1, 1, -y2 * x1, -y2 * y1, -y2])
+
+#     A = np.array(A)  # shape = 2N x 9
+#     # B = np.dot(np.transpose(A), A)  # B = A^T*A
+
+#     _, _, V = np.linalg.svd(A)
+#     H = V[-1].reshape((3, 3))
+
+#     H = H / H[-1, -1]
+
+#     print('Final homography H:')
+#     print(H)
+
+#     return H
