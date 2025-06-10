@@ -10,15 +10,15 @@ This image stitching application is designed to combine multiple photographic wi
 
 1. These are the 3 input images to be stitched
 
-    ![These are the 3 input images to be stitched](inputs.png)
+    ![These are the 3 input images to be stitched](assets/demo_imgs_and_diagrams/inputs.png)
 
 2. This is the stitched output image
 
-    ![This is the stitched output image](output.png)
+    ![This is the stitched output image](assets/demo_imgs_and_diagrams/output.png)
 
 3. This is the final result after manually cropping
 
-    ![This is the final result after manually cropping](final_result.png)
+    ![This is the final result after manually cropping](assets/demo_imgs_and_diagrams/final_result.png)
 
 ## Installation
 
