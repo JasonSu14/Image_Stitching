@@ -14,20 +14,6 @@ The core steps include:
 
 - **Image warping** and **multi-band blending** for smooth transitions
 
-## Project Structure
-
-    ```bash
-    ├── Image_Stitching/
-    │   ├── image_stitching.ipynb    # Final notebook implementation
-    │   ├── legacy/                  # Old development-stage Python files
-    │   ├── assets/
-    │   │   ├── inputs/              # Input image sets
-    │   │   ├── outputs/             # Stitched and cropped results
-    │   │   └── demo_imgs_and_diagrams/ # Diagrams and README visuals
-    │   ├── requirements.txt
-    │   └── README.md
-    ```
-
 ## Demo
 
 1. **Input images** (3-view capture):
